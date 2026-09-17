@@ -34,13 +34,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeDemoTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    DemoScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
     }
 }
-@Composable
-fun DemoText(message: String, fontSize: Float) {
     @Composable
     fun DemoText(message: String, fontSize: Float) {
         Text(
@@ -50,12 +49,13 @@ fun DemoText(message: String, fontSize: Float) {
 
         )
     }
-}
-@Preview
+@Preview(showSystemUi = true)
 @Composable
 fun DemoTextPreview() {
     ComposeDemoTheme {
-        DemoText(message = "Welcome to Android", fontSize = 12f)
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            DemoScreen(modifier = Modifier.padding(innerPadding))
+        }
     }
 }
 @Composable
@@ -69,7 +69,7 @@ fun DemoSlider(sliderPosition: Float, onPositionChange: (Float) -> Unit ) {
 }
 @Composable
 fun DemoScreen(modifier: Modifier = Modifier) {
-    var sliderPosition by remember { mutableFloatStateOf(20f) }
+    var sliderPosition: Float by remember { mutableFloatStateOf(20f) }
     val handlePositionChange = { position : Float ->
         sliderPosition = position
     }
